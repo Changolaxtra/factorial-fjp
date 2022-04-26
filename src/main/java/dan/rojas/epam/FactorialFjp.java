@@ -15,6 +15,7 @@ public class FactorialFjp {
 
   private final static Logger logger = LoggerFactory.getLogger(FactorialFjp.class);
   public static final long NUMBER = 10000;
+  public static final int PARALLELISM_LEVEL = 8;
 
   public static void main(String[] args) {
     final BigInteger forkJoinResult = forkJoinCompute();
@@ -30,7 +31,7 @@ public class FactorialFjp {
   private static BigInteger forkJoinCompute() {
     try {
       long startMillis = System.currentTimeMillis();
-      final ForkJoinPool forkJoinPool = new ForkJoinPool(8);
+      final ForkJoinPool forkJoinPool = new ForkJoinPool(PARALLELISM_LEVEL);
       final Future<BigInteger> result = forkJoinPool.submit(new FactorialRecursiveAction(1, NUMBER));
       final BigInteger factorial = result.get();
       logger.info("ForkJoin calculated in " + (System.currentTimeMillis() - startMillis) + "ms");
