@@ -30,7 +30,7 @@ public class FactorialFjp {
   private static BigInteger forkJoinCompute() {
     try {
       long startMillis = System.currentTimeMillis();
-      final ForkJoinPool forkJoinPool = new ForkJoinPool(4);
+      final ForkJoinPool forkJoinPool = new ForkJoinPool(8);
       final Future<BigInteger> result = forkJoinPool.submit(new FactorialRecursiveAction(1, NUMBER));
       final BigInteger factorial = result.get();
       logger.info("ForkJoin calculated in " + (System.currentTimeMillis() - startMillis) + "ms");
