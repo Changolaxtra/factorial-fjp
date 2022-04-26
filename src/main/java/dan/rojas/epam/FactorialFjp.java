@@ -14,8 +14,8 @@ import java.util.concurrent.Future;
 public class FactorialFjp {
 
   private final static Logger logger = LoggerFactory.getLogger(FactorialFjp.class);
-  public static final long NUMBER = 10000;
-  public static final int PARALLELISM_LEVEL = 8;
+  private static final long NUMBER = 10000;
+  private static final int PARALLELISM_LEVEL = 8;
 
   public static void main(String[] args) {
     final BigInteger forkJoinResult = forkJoinCompute();
@@ -56,7 +56,7 @@ public class FactorialFjp {
       return null;
     }
   }
-
+  
   private static BigInteger recursiveCompute() {
     try {
       long startMillis = System.currentTimeMillis();

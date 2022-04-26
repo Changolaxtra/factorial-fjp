@@ -2,6 +2,7 @@ package dan.rojas.epam.action;
 
 import java.math.BigInteger;
 
+@Deprecated
 public class Factorial {
 
   private final static BigInteger TWO = BigInteger.valueOf(2);
