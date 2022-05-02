@@ -1,17 +1,14 @@
 package dan.rojas.epam.action;
 
 import dan.rojas.epam.utils.Tuple;
+import lombok.extern.slf4j.Slf4j;
 
 import java.math.BigInteger;
 import java.util.concurrent.RecursiveTask;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-
+@Slf4j
 public class FactorialRecursiveAction extends RecursiveTask<BigInteger> {
-
-  private final static Logger logger = LoggerFactory.getLogger(FactorialRecursiveAction.class);
 
   private static final long LIMIT = 50L;
   private final long start;
@@ -26,18 +23,18 @@ public class FactorialRecursiveAction extends RecursiveTask<BigInteger> {
   protected BigInteger compute() {
     BigInteger result = BigInteger.ONE;
     if ((end - start) <= LIMIT) {
-      logger.debug("Computing...");
+      log.debug("Computing...");
       for (long number = start; number <= end; number++) {
         result = result.multiply(BigInteger.valueOf(number));
       }
     } else {
-      logger.debug("Creating subtasks for:" + start + "-" + end);
+      log.debug("Creating subtasks for:" + start + "-" + end);
       final Tuple<FactorialRecursiveAction> subtasks = getSubtasks(start, end);
       subtasks.getFirst().fork();
       subtasks.getSecond().fork();
       result = subtasks.getFirst().join().multiply(subtasks.getSecond().join());
     }
-    logger.debug("Returning result...");
+    log.debug("Returning result...");
     return result;
   }
 
